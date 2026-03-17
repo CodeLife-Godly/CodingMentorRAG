@@ -46,7 +46,7 @@ GENERAL CONSTRAINTS:
 - Do NOT include compiler messages, file paths, or warnings in output
 
 FORMAT RULES (VERY STRICT):
-- Output MUST be valid Markdown
+- Do NOT use symbols like ##, **, or ``` 
 - Each field MUST be on a new line
 - Do NOT merge fields
 - Use EXACT headings

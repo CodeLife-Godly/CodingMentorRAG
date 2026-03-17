@@ -98,6 +98,9 @@ button:disabled{
     max-height:350px;
     overflow-y:auto;
     line-height:1.6;
+
+    word-wrap:break-word;
+    overflow-wrap:break-word;
 }
 
 .response strong{
@@ -105,10 +108,12 @@ button:disabled{
 }
 
 .response code{
-    background:#1e293b;
+    background:transparent;
     padding:2px 6px;
     border-radius:4px;
     font-size:14px;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 .response pre{
@@ -116,6 +121,10 @@ button:disabled{
     padding:10px;
     border-radius:6px;
     overflow-x:auto;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: hidden;
 }
 
 .error{
