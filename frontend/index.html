@@ -1,7 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>AI Coding Mentor</title>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
 
@@ -15,11 +18,10 @@ body{
     justify-content:center;
     align-items:flex-start;
     min-height:100vh;
-    overflow-y:auto;
 }
 
 .container{
-    width:600px;
+    width:650px;
     max-width:95%;
     background:#1e293b;
     padding:25px;
@@ -34,7 +36,7 @@ h2{
 
 textarea{
     width:100%;
-    height:200px;
+    height:220px;
     background:#020617;
     color:white;
     border:1px solid #334155;
@@ -70,23 +72,53 @@ button:disabled{
     cursor:not-allowed;
 }
 
-.response{
-    margin-top:20px;
-    background:#020617;
-    padding:12px;
-    white-space:pre-wrap;
-    min-height:60px;
-    border-radius:8px;
-    border:1px solid #334155;
-    max-height:300px;
-    overflow-y:auto;
-}
-
 .loading{
     margin-top:10px;
     color:#38bdf8;
     font-style:italic;
     display:none;
+    text-align:center;
+}
+
+.response{
+    margin-top:20px;
+    background:#020617;
+    padding:15px;
+    border-radius:8px;
+    border:1px solid #334155;
+    max-height:350px;
+    overflow-y:auto;
+    line-height:1.6;
+}
+
+.response strong{
+    color:#60a5fa;
+}
+
+.response code{
+    background:#1e293b;
+    padding:2px 6px;
+    border-radius:4px;
+    font-size:14px;
+}
+
+.response pre{
+    background:#020617;
+    padding:10px;
+    border-radius:6px;
+    overflow-x:auto;
+}
+
+.response ul{
+    padding-left:20px;
+}
+
+.response li{
+    margin-bottom:6px;
+}
+
+.error{
+    color:#f87171;
     text-align:center;
 }
 
@@ -99,12 +131,12 @@ button:disabled{
 
 <h2>AI Coding Mentor</h2>
 
-<textarea id="code" placeholder="Paste your code here..."></textarea>
+<textarea id="code" placeholder="Paste your C code here..."></textarea>
 
 <button id="analyzeBtn" onclick="analyze()">Analyze Code</button>
 
 <div class="loading" id="loading">
-Analyzing code... 
+Analyzing code...
 </div>
 
 <div class="response" id="result"></div>
@@ -115,34 +147,43 @@ Analyzing code...
 
 async function analyze(){
 
-const code = document.getElementById("code").value;
+const code = document.getElementById("code").value.trim();
 const button = document.getElementById("analyzeBtn");
 const loading = document.getElementById("loading");
 const result = document.getElementById("result");
 
+if(!code){
+    result.innerHTML = "<div class='error'>Please enter some code.</div>";
+    return;
+}
+
 button.disabled = true;
 loading.style.display = "block";
-result.innerText = "";
+result.innerHTML = "";
 
 try{
 
 const response = await fetch("http://127.0.0.1:8000/mentor",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-code:code
-})
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        code:code
+    })
 });
+
+if(!response.ok){
+    throw new Error("Server error");
+}
 
 const data = await response.json();
 
-result.innerText = data.mentor_response;
+result.innerHTML = marked.parse(data.mentor_response);
 
 }catch(error){
 
-result.innerText = "Error contacting AI mentor.";
+result.innerHTML = "<div class='error'>Error contacting AI mentor.</div>";
 
 }
 

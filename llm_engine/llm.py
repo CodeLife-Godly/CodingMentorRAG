@@ -22,6 +22,9 @@ def generate_answer(code, context):
     Do NOT ignore small syntax issues.
     Be precise and concise.
 
+    Relevant Knowledge:
+    {context}
+
     Code={code}
 """
 
