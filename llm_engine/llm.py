@@ -3,41 +3,68 @@ import os
 
 os.environ["NO_PROXY"] = "localhost,127.0.0.1"
 
-def generate_answer(code, context):
+def generate_answer(code, context, compiler_output, language="general"):
+
+    lang_map = {
+        "c": "C",
+        "cpp": "C++",
+        "python": "Python"
+    }
+
+    lang_name = lang_map.get(language, "programming")
 
     prompt = f"""
-    You are an expert C programming mentor.
+You are an expert {lang_name} programming mentor.
 
-    Analyze the code strictly.
+Relevant programming knowledge:
+{context}
 
-    Only report real issues.
+The following compiler output is provided for internal analysis.
+Do NOT display it in your response.
+Use it only to understand errors.
 
-    Check ALL of the following:
-    1. Syntax errors
-    2. Logical errors
-    3. Runtime errors (memory, pointers, bounds)
-    4. Control flow mistakes
+Compiler Output:
+{compiler_output}
 
-    Do NOT assume missing context.
-    Do NOT ignore small syntax issues.
-    Be precise and concise.
+Analyze the code strictly.
 
-    Relevant Knowledge:
-    {context}
+RULES:
 
-    Code={code}
+1. If compiler output is NOT empty:
+   - Explain ONLY the errors indicated by the compiler
+   - Do NOT add new issues
+
+2. If compiler output IS empty:
+   - Analyze the code for logical errors
+   - If no issues are found then return no issues found
+
+GENERAL CONSTRAINTS:
+- You MUST point to the exact code snippet from the given code
+- Do NOT generate or modify code
+- Do NOT assume missing parts
+- Do NOT give corrected code
+- Do NOT include compiler messages, file paths, or warnings in output
+
+FORMAT RULES (VERY STRICT):
+- Output MUST be valid Markdown
+- Each field MUST be on a new line
+- Do NOT merge fields
+- Use EXACT headings
+
+code = {code}
+
 """
 
     response = requests.post(
         "http://localhost:11434/api/generate",
         json={
-            "model":"qwen2.5-coder",
-            "prompt":prompt,
-            "stream":False
+            "model": "qwen2.5-coder",
+            "prompt": prompt,
+            "stream": False,
+            "options": {
+                "temperature": 0.2
+            }
         }
     )
-
-    print("STATUS:", response.status_code)
-    print("TEXT:", response.text)
 
     return response.json().get("response", "No response")

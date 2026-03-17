@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +31,16 @@ body{
 h2{
     margin-top:0;
     text-align:center;
+}
+
+select{
+    width:100%;
+    padding:10px;
+    margin-bottom:12px;
+    border-radius:6px;
+    background:#020617;
+    color:white;
+    border:1px solid #334155;
 }
 
 textarea{
@@ -109,20 +118,13 @@ button:disabled{
     overflow-x:auto;
 }
 
-.response ul{
-    padding-left:20px;
-}
-
-.response li{
-    margin-bottom:6px;
-}
-
 .error{
     color:#f87171;
     text-align:center;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -130,6 +132,12 @@ button:disabled{
 <div class="container">
 
 <h2>AI Coding Mentor</h2>
+
+<select id="language">
+    <option value="c">C</option>
+    <option value="cpp">C++</option>
+    <option value="python">Python</option>
+</select>
 
 <textarea id="code" placeholder="Paste your C code here..."></textarea>
 
@@ -145,51 +153,90 @@ Analyzing code...
 
 <script>
 
-async function analyze(){
+const codeInput = document.getElementById("code");
+const languageSelect = document.getElementById("language");
 
-const code = document.getElementById("code").value.trim();
-const button = document.getElementById("analyzeBtn");
-const loading = document.getElementById("loading");
-const result = document.getElementById("result");
-
-if(!code){
-    result.innerHTML = "<div class='error'>Please enter some code.</div>";
-    return;
+function updatePlaceholder(){
+    if(languageSelect.value === "c"){
+        codeInput.placeholder = "Paste your C code here...";
+    }
+    else if(languageSelect.value === "cpp"){
+        codeInput.placeholder = "Paste your C++ code here...";
+    }
+    else if(languageSelect.value === "python"){
+        codeInput.placeholder = "Paste your Python code here...";
+    }
 }
 
-button.disabled = true;
-loading.style.display = "block";
-result.innerHTML = "";
-
-try{
-
-const response = await fetch("http://127.0.0.1:8000/mentor",{
-    method:"POST",
-    headers:{
-        "Content-Type":"application/json"
-    },
-    body:JSON.stringify({
-        code:code
-    })
+codeInput.addEventListener("input", () => {
+    localStorage.setItem("savedCode", codeInput.value);
 });
 
-if(!response.ok){
-    throw new Error("Server error");
-}
+languageSelect.addEventListener("change", () => {
+    localStorage.setItem("savedLanguage", languageSelect.value);
+    updatePlaceholder();
+});
 
-const data = await response.json();
+window.onload = () => {
+    const savedCode = localStorage.getItem("savedCode");
+    const savedLang = localStorage.getItem("savedLanguage");
 
-result.innerHTML = marked.parse(data.mentor_response);
+    if (savedCode) {
+        codeInput.value = savedCode;
+    }
 
-}catch(error){
+    if (savedLang) {
+        languageSelect.value = savedLang;
+    }
 
-result.innerHTML = "<div class='error'>Error contacting AI mentor.</div>";
+    updatePlaceholder();
+};
 
-}
+async function analyze(){
 
-loading.style.display = "none";
-button.disabled = false;
+    const code = codeInput.value.trim();
+    const language = languageSelect.value;
 
+    const button = document.getElementById("analyzeBtn");
+    const loading = document.getElementById("loading");
+    const result = document.getElementById("result");
+
+    if(!code){
+        result.innerHTML = "<div class='error'>Please enter some code.</div>";
+        return;
+    }
+
+    button.disabled = true;
+    loading.style.display = "block";
+    result.innerHTML = "";
+
+    try{
+
+        const response = await fetch("http://127.0.0.1:8000/mentor",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                code:code,
+                language:language
+            })
+        });
+
+        if(!response.ok){
+            throw new Error("Server error");
+        }
+
+        const data = await response.json();
+
+        result.innerHTML = marked.parse(data.mentor_response);
+
+    }catch(error){
+        result.innerHTML = "<div class='error'>Error contacting AI mentor.</div>";
+    }
+
+    loading.style.display = "none";
+    button.disabled = false;
 }
 
 </script>

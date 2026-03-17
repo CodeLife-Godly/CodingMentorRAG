@@ -8,6 +8,7 @@ with open("knowledge_base/coding_kb.json") as f:
 
 texts = [
     f"""
+    Language: {d.get('language', 'general')}
     Topic: {d['topic']}
     Description: {d['description']}
     Bad Example: {d['bad_example']}
@@ -25,9 +26,14 @@ index = faiss.IndexFlatL2(dimension)
 
 index.add(np.array(embeddings))
 
-def search(query, k=2):
+def search(query, language="general", k=2):
 
-    query_embedding = np.array([get_embedding(query)])
+    enhanced_query = f"""
+    Language: {language}
+    Query: {query}
+    """
+
+    query_embedding = np.array([get_embedding(enhanced_query)])
 
     distances, indices = index.search(query_embedding, k)
 
