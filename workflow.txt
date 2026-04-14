@@ -1,0 +1,35 @@
+User Code Input (Frontend)
+        ↓
+Frontend (JS)
+- Get code
+- Detect language (optional)
+        ↓
+API Request (/analyze)
+        ↓
+Backend (FastAPI)
+        ↓
+Create Query from Code
+        ↓
+Embedding Model (SentenceTransformer)
+        ↓
+Vector Representation
+        ↓
+FAISS Index Search (Cosine Similarity)
+        ↓
+Retrieve Relevant Knowledge (RAG)
+        ↓
+Combine:
+[User Code + RAG Context + Mode]
+        ↓
+LLM (Ollama / Model)
+        ↓
+Generated Analysis
+        ↓
+Backend Response (JSON)
+        ↓
+Frontend Rendering
+- Typewriter effect
+- Code blocks
+- Inline styling
+        ↓
+Final Output to User
