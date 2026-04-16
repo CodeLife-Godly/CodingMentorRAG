@@ -47,12 +47,10 @@ def run_code(code, language):
         else:
             return "Execution not supported for this language"
 
-        # create temp file
         with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as f:
             f.write(code.encode())
             file_path = f.name
 
-        # prepare command
         final_cmd = []
         for part in cmd:
             part = part.replace("{file}", file_path)
