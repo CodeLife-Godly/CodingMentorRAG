@@ -18,7 +18,7 @@ def run_linter(code, language):
         }
 
         if language not in suffix_map:
-            return "No linter configured for this language"
+            return ""
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=suffix_map[language]) as f:
             f.write(code.encode())
@@ -29,13 +29,13 @@ def run_linter(code, language):
             cmd = ["pylint", "--disable=all", "--enable=E", file_path]
 
         elif language in ["javascript", "js"]:
-            cmd = ["eslint", file_path]
+            cmd = ["eslint", file_path, "--no-eslintrc", "--quiet"]
 
         elif language == "c":
-            cmd = ["gcc", "-Wall", "-fsyntax-only", file_path]
+            cmd = ["gcc", "-fsyntax-only", file_path]
 
         elif language == "cpp":
-            cmd = ["g++", "-Wall", "-fsyntax-only", file_path]
+            cmd = ["g++", "-fsyntax-only", file_path]
 
         elif language == "java":
             cmd = ["javac", file_path]
@@ -58,7 +58,16 @@ def run_linter(code, language):
 
         output = (result.stdout or "") + (result.stderr or "")
 
-        return output.strip() if output.strip() else "No issues found"
 
-    except Exception as e:
-        return str(e)
+        lower = output.lower()
+
+        if "eslint" in lower and ("config" in lower or "eslintrc" in lower):
+            return ""
+
+        if "not found" in lower or "is not recognized" in lower:
+            return ""
+
+        return output.strip()
+
+    except Exception:
+        return ""

@@ -19,7 +19,7 @@ async def analyze_code(data: dict):
     lint_output = run_linter(code, language)
     parsed = parse_code(code, language)
     runtime_output = run_code(code, language)
-    rag_context = get_rag_context(code)
+    rag_context = get_rag_context(code, language)
 
     prompt = build_prompt(
         code,

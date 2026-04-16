@@ -1,35 +1,27 @@
 User Code Input (Frontend)
         ↓
-Frontend (JS)
-- Get code
-- Detect language (optional)
+Frontend (Monaco Editor + JS UI)
         ↓
-API Request (/analyze)
+API Request (POST /analyze)
         ↓
-Backend (FastAPI)
+FastAPI Backend
         ↓
-Create Query from Code
+Language Detection
         ↓
-Embedding Model (SentenceTransformer)
-        ↓
-Vector Representation
-        ↓
-FAISS Index Search (Cosine Similarity)
-        ↓
-Retrieve Relevant Knowledge (RAG)
-        ↓
-Combine:
-[User Code + RAG Context + Mode]
-        ↓
-LLM (Ollama / Model)
-        ↓
-Generated Analysis
-        ↓
-Backend Response (JSON)
-        ↓
-Frontend Rendering
-- Typewriter effect
-- Code blocks
-- Inline styling
-        ↓
-Final Output to User
+-----------------------------------
+Parallel Processing Pipeline
+-----------------------------------
+   ↓           ↓            ↓
+Linting     AST Parsing   Execution
+   ↓           ↓            ↓
+   -------- Combine Signals --------
+                 ↓
+        RAG Retrieval (FAISS)
+                 ↓
+        Prompt Construction
+                 ↓
+        LLM (Ollama - qwen coder)
+                 ↓
+        Structured Analysis
+                 ↓
+Frontend Rendering (Chat UI)

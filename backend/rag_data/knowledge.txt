@@ -1,169 +1,140 @@
-[Python Syntax Errors]
-Missing colon after function definition.
-Indentation must be consistent in Python.
-Incorrect indentation causes IndentationError.
-Using tabs and spaces together can break code.
+KNOWLEDGE_BASE = [
 
-[Python Logical Errors]
-Using wrong operators (e.g., subtraction instead of addition) leads to incorrect results.
-Incorrect loop conditions may skip or repeat values.
-Initializing variables incorrectly can cause wrong outputs.
+# ---------------- PYTHON ----------------
+"Python Syntax Error: Missing colon after control statements like if, for, while, def causes SyntaxError.",
+"Python Syntax Error: Mixing tabs and spaces or incorrect indentation raises IndentationError.",
+"Python Syntax Error: Unclosed parentheses or brackets cause SyntaxError.",
+"Python Runtime Error: Division by zero raises ZeroDivisionError.",
+"Python Runtime Error: Accessing undefined variable raises NameError.",
+"Python Runtime Error: Index out of range raises IndexError.",
+"Python Runtime Error: Invalid type operations raise TypeError.",
+"Python Runtime Error: Accessing missing dictionary key raises KeyError.",
+"Python Logical Error: Using wrong operator results in incorrect output.",
+"Python Logical Error: Mutable default arguments retain state across calls.",
+"Python Logical Error: Using 'is' instead of '==' compares identity, not value.",
+"Python Logical Error: Off-by-one error in range() skips elements.",
+"Python Optimization: Use list comprehensions instead of loops.",
+"Python Optimization: Use set/dict for O(1) lookup instead of list.",
+"Python Optimization: Avoid repeated string concatenation, use join().",
+"Python Optimization: Use generators for large datasets to save memory.",
 
-[Python Runtime Issues]
-Division by zero raises ZeroDivisionError.
-Accessing out-of-range index raises IndexError.
-Using undefined variables causes NameError.
-Using None where iterable is expected causes TypeError.
+# ---------------- JAVASCRIPT ----------------
+"JavaScript Syntax Error: Missing closing bracket or parenthesis causes SyntaxError.",
+"JavaScript Syntax Error: Invalid arrow function syntax causes parsing error.",
+"JavaScript Runtime Error: Accessing property of null or undefined causes TypeError.",
+"JavaScript Runtime Error: Calling non-function value causes TypeError.",
+"JavaScript Runtime Error: Infinite recursion causes RangeError stack overflow.",
+"JavaScript Runtime Error: Accessing undeclared variable in strict mode causes ReferenceError.",
+"JavaScript Logical Error: Using == instead of === causes type coercion issues.",
+"JavaScript Logical Error: Async function without await leads to unresolved promise.",
+"JavaScript Logical Error: Closure inside loop causes shared variable bug.",
+"JavaScript Logical Error: Floating point precision issues (0.1 + 0.2 ≠ 0.3).",
+"JavaScript Optimization: Use let/const instead of var for better scoping.",
+"JavaScript Optimization: Use map/filter instead of loops.",
+"JavaScript Optimization: Avoid deeply nested callbacks, use async/await.",
 
-[Python Advanced Issues]
-Mutable default arguments retain state across function calls.
-Example: def func(x, arr=[]) leads to unexpected behavior.
-Shadowing built-in names (like list, str) causes bugs.
+# ---------------- C ----------------
+"C Syntax Error: Missing semicolon causes compilation failure.",
+"C Syntax Error: Using undeclared variable causes compilation error.",
+"C Runtime Error: Dereferencing NULL pointer causes segmentation fault.",
+"C Runtime Error: Accessing array out of bounds causes undefined behavior.",
+"C Runtime Error: Using uninitialized variables causes unpredictable results.",
+"C Runtime Error: Double free or memory leak causes instability.",
+"C Logical Error: Incorrect loop conditions cause infinite loops.",
+"C Logical Error: Integer overflow produces incorrect results.",
+"C Optimization: Prefer stack allocation over heap when possible.",
+"C Optimization: Use bitwise operations for faster computation.",
 
-[Python Optimization]
-Use list comprehensions instead of loops for cleaner code.
-Avoid nested loops when possible (O(n^2) complexity).
-Use sets or dictionaries for fast lookup.
-Use enumerate instead of range(len()).
+# ---------------- C++ ----------------
+"C++ Syntax Error: Missing semicolon after class or statement causes compilation error.",
+"C++ Syntax Error: Missing header include leads to undefined identifier.",
+"C++ Runtime Error: Use-after-free pointer causes undefined behavior.",
+"C++ Runtime Error: Dereferencing dangling pointer causes crash.",
+"C++ Runtime Error: Memory leak occurs when allocated memory is not freed.",
+"C++ Logical Error: Object slicing occurs when assigning derived to base by value.",
+"C++ Logical Error: Missing virtual destructor causes incomplete destruction.",
+"C++ Optimization: Use move semantics to avoid deep copying.",
+"C++ Optimization: Reserve container capacity to avoid reallocation.",
 
+# ---------------- JAVA ----------------
+"Java Syntax Error: Missing semicolon or incorrect class structure causes compilation error.",
+"Java Syntax Error: Accessing non-static member from static context causes error.",
+"Java Runtime Error: NullPointerException occurs when accessing null object.",
+"Java Runtime Error: ArrayIndexOutOfBoundsException occurs for invalid index.",
+"Java Runtime Error: ClassCastException occurs for invalid casting.",
+"Java Runtime Error: ArithmeticException occurs on division by zero.",
+"Java Logical Error: Using == for string comparison compares references, not content.",
+"Java Logical Error: Incorrect loop condition causes infinite loop.",
+"Java Logical Error: Missing equals/hashCode breaks HashMap behavior.",
+"Java Optimization: Use StringBuilder instead of string concatenation.",
+"Java Optimization: Use appropriate data structures (ArrayList vs LinkedList).",
 
-[JavaScript Syntax Errors]
-Missing closing brackets or parentheses cause syntax errors.
-Incorrect arrow function syntax leads to parsing errors.
+# ---------------- GO ----------------
+"Go Syntax Error: Unused variables or imports cause compilation error.",
+"Go Runtime Error: Nil pointer dereference causes panic.",
+"Go Runtime Error: Index out of range causes panic.",
+"Go Runtime Error: Sending to closed channel causes panic.",
+"Go Runtime Error: Concurrent map writes cause fatal error.",
+"Go Logical Error: Ignoring error return values causes silent failure.",
+"Go Logical Error: Goroutine leak occurs when blocked indefinitely.",
+"Go Optimization: Use buffered channels to improve concurrency.",
+"Go Optimization: Reduce allocations to improve performance.",
 
-[JavaScript Runtime Issues]
-Accessing property of null or undefined throws runtime error.
-Calling functions on undefined variables causes crashes.
+# ---------------- RUST ----------------
+"Rust Syntax Error: Using moved value causes compilation error.",
+"Rust Syntax Error: Missing lifetime annotations causes compile error.",
+"Rust Runtime Error: Calling unwrap() on None causes panic.",
+"Rust Runtime Error: Index out of bounds causes panic.",
+"Rust Runtime Error: Integer overflow may panic in debug mode.",
+"Rust Logical Error: Incorrect ownership handling leads to bugs.",
+"Rust Logical Error: Unnecessary cloning reduces performance.",
+"Rust Optimization: Use references instead of cloning.",
+"Rust Optimization: Prefer stack allocation when possible.",
 
-[JavaScript Async Issues]
-Promises should be awaited using await.
-Missing await leads to unresolved promises.
-Async functions must be declared using async keyword.
+# ---------------- PHP ----------------
+"PHP Syntax Error: Missing semicolon or invalid syntax causes parse error.",
+"PHP Syntax Error: Missing dollar sign in variable causes parse error.",
+"PHP Runtime Error: Undefined variable or index causes warning.",
+"PHP Runtime Error: Calling function on null causes fatal error.",
+"PHP Runtime Error: Wrong argument count causes error.",
+"PHP Logical Error: Loose comparison (==) causes unexpected results.",
+"PHP Optimization: Use isset() instead of array_key_exists() for performance.",
+"PHP Optimization: Avoid repeated computation inside loops.",
 
-[JavaScript Logical Errors]
-Using == instead of === can cause unexpected type coercion.
-Improper loop conditions can lead to infinite loops.
+# ---------------- BASH ----------------
+"Bash Syntax Error: Missing fi, done, or incorrect structure causes syntax error.",
+"Bash Syntax Error: Missing spaces in conditional brackets causes error.",
+"Bash Runtime Error: Unquoted variables cause word splitting issues.",
+"Bash Runtime Error: Undefined variable expands to empty value.",
+"Bash Logical Error: Using wrong comparison operator causes incorrect result.",
+"Bash Optimization: Avoid spawning external processes unnecessarily.",
 
-[JavaScript Optimization]
-Use map/filter instead of loops when possible.
-Avoid deeply nested callbacks (use async/await).
+# ---------------- TYPESCRIPT ----------------
+"TypeScript Syntax Error: Type mismatch causes compilation error.",
+"TypeScript Syntax Error: Accessing property not in interface causes error.",
+"TypeScript Runtime Error: Type assertions may cause runtime failures.",
+"TypeScript Logical Error: Incorrect type assumptions lead to bugs.",
+"TypeScript Optimization: Use strict typing instead of any.",
+"TypeScript Optimization: Use readonly to prevent mutation.",
 
-[C Syntax Errors]
-Missing semicolon causes compilation error.
-Incorrect header inclusion leads to undefined references.
+# ---------------- GENERAL ----------------
+"Logical Error: Off-by-one errors are common in loops.",
+"Logical Error: Incorrect conditions lead to wrong outputs.",
+"Runtime Error: Division by zero causes failure.",
+"Runtime Error: Invalid type operations cause crash.",
+"Optimization: Avoid nested loops to reduce complexity.",
+"Optimization: Use hash maps for faster lookup.",
 
-[C Runtime Issues]
-Using uninitialized variables causes undefined behavior.
-Accessing invalid memory leads to segmentation fault.
+# ---------------- EXAMPLES ----------------
+"Example Python Runtime Error: Division by zero.",
+"Example Python Logical Error: Using subtraction instead of addition.",
+"Example JavaScript Bug: Accessing property of null.",
+"Example JavaScript Async Issue: Missing await.",
+"Example C++ Issue: Use-after-free pointer.",
+"Example Java Runtime Error: Null pointer exception.",
+"Example Go Error: Ignoring returned error causes failure.",
+"Example Rust Error: unwrap() on None causes panic.",
+"Example Bash Issue: Unquoted variable causes splitting.",
+"Example Optimization Issue: Nested loops causing O(n^2)."
 
-[C++ Issues]
-Using deleted pointers (use-after-free) causes crashes.
-Memory leaks occur when allocated memory is not freed.
-Incorrect use of references and pointers leads to bugs.
-
-[C/C++ Optimization]
-Use references instead of copying objects.
-Avoid unnecessary memory allocation.
-
-[Java Syntax Errors]
-Missing semicolons cause compilation failure.
-Incorrect class structure leads to errors.
-
-[Java Runtime Issues]
-NullPointerException occurs when accessing null object.
-ArrayIndexOutOfBoundsException occurs for invalid index.
-
-[Java Logical Errors]
-Incorrect loop logic can cause infinite loops.
-Improper condition checks lead to wrong outputs.
-
-[Java Optimization]
-Use proper data structures (ArrayList vs LinkedList).
-Avoid redundant object creation.
-
-[General Logical Errors]
-Incorrect conditions lead to wrong outputs.
-Off-by-one errors occur in loops frequently.
-Using wrong variable in computation leads to incorrect results.
-
-[General Runtime Issues]
-Division by zero is a common runtime error.
-Invalid type operations cause crashes.
-Incorrect input handling leads to unexpected behavior.
-
-[General Optimization]
-Avoid nested loops when possible.
-Use hash maps for faster lookup.
-Reduce time complexity from O(n^2) to O(n) when possible.
-
-[Best Practices]
-Use meaningful variable names.
-Write modular code.
-Keep functions small and focused.
-Avoid repeating code (DRY principle).
-
-[Python Example Syntax Error]
-def greet()
-    print("Hello")
-
-Missing colon after function definition causes syntax error.
-
-
-[Python Example Logical Error]
-def add(a, b):
-    return a - b
-
-This function uses subtraction instead of addition, leading to incorrect output.
-
-
-[Python Example Runtime Error]
-x = 10 / 0
-
-Division by zero raises ZeroDivisionError.
-
-
-[Python Example Indentation Error]
-def test():
-print("Hello")
-
-Incorrect indentation causes IndentationError.
-
-
-[JavaScript Example Syntax Error]
-function test() {
-  console.log("Hello"
-}
-
-Missing closing parenthesis causes syntax error.
-
-
-[JavaScript Example Runtime Error]
-let user = null;
-console.log(user.name);
-
-Accessing property of null causes runtime error.
-
-
-[JavaScript Example Async Issue]
-async function fetchData() {
-  let data = fetch("url");
-  console.log(data);
-}
-
-Missing await leads to unresolved promise.
-
-[C++ Example Memory Issue]
-int* ptr = new int(10);
-delete ptr;
-cout << *ptr;
-
-Using deleted pointer causes undefined behavior.
-
-
-[General Example Optimization]
-for i in range(len(arr)):
-    for j in range(len(arr)):
-        if arr[i] == arr[j]:
-            print(arr[i])
-
-Nested loops cause O(n^2) complexity, can be optimized using hash maps.
+]

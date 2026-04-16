@@ -674,8 +674,7 @@
     updateLineNums();
     saveCode();
 
-    const lang = detectLanguageFrontend(ta.value);
-    updateLanguage(lang);
+    updateLanguage("Analyzing");
   }
 
   ta.addEventListener('scroll', () => { lnEl.scrollTop = ta.scrollTop; });
@@ -824,7 +823,6 @@
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
-  /* ── Analyze ── */
   async function analyze() {
     if (isLoading) return;
     const code = ta.value.trim();
@@ -891,21 +889,6 @@
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') analyze();
   });
 
-  function detectLanguageFrontend(code) {
-    const c = code.toLowerCase();
-
-    if (c.includes("def ") || c.includes("print(")) return "python";
-    if (c.includes("console.log") || c.includes("function ")) return "javascript";
-    if (c.includes("#include")) return "c";
-    if (c.includes("std::")) return "cpp";
-    if (c.includes("public class")) return "java";
-    if (c.includes("package main")) return "go";
-    if (c.includes("fn main")) return "rust";
-    if (c.includes("<?php")) return "php";
-    if (c.includes("#!/bin/bash") || c.includes("echo ")) return "bash";
-
-    return "unknown";
-  }
 
   loadCode();
 </script>
