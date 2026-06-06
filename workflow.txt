@@ -4,19 +4,21 @@ Frontend (Monaco Editor + JS UI)
         ↓
 API Request (POST /analyze)
         ↓
-FastAPI Backend
+FastAPI Backend (/analyze)
+        ↓
+Extract Code + Mode
         ↓
 Language Detection
         ↓
 -----------------------------------
-Parallel Processing Pipeline
+Parallel Processing (Independent)
 -----------------------------------
-   ↓           ↓            ↓
-Linting     AST Parsing   Execution
-   ↓           ↓            ↓
-   -------- Combine Signals --------
-                 ↓
-        RAG Retrieval (FAISS)
+   ↓           ↓            ↓            ↓
+Linting     AST Parsing   Execution     RAG Retrieval (FAISS)
+   ↓           ↓            ↓            ↓
+-----------------------------------
+      Combine All Outputs
+-----------------------------------
                  ↓
         Prompt Construction
                  ↓

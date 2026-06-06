@@ -36,7 +36,6 @@ def prioritize(results, query):
 
 
 def get_rag_context(query, language, k=8):
-    # Encode query
     q_emb = model.encode([query])
     q_emb = np.array(q_emb).astype("float32")
     faiss.normalize_L2(q_emb)
@@ -65,6 +64,7 @@ def get_rag_context(query, language, k=8):
 
     prioritized = prioritize(lang_filtered, query)
 
-    final = prioritized[:5]
+    limit = min(5, len(prioritized))
+    final = prioritized[:limit]
 
     return "\n\n".join(final)

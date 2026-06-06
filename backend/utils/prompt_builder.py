@@ -61,7 +61,7 @@ INSTRUCTIONS:
 ---
 
 OUTPUT RULES (STRICT):
-
+- Always give corrected code 
 - Output ONLY sections that contain real content
 - Do NOT include empty sections
 - Do NOT include markdown (no **, no ``` blocks)

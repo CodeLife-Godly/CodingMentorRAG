@@ -2,6 +2,9 @@ import subprocess
 import tempfile
 import os
 
+# finds syntax error without running the file
+#static analysis
+#linter builds AST
 def run_linter(code, language):
     try:
         suffix_map = {
@@ -57,7 +60,6 @@ def run_linter(code, language):
         os.remove(file_path)
 
         output = (result.stdout or "") + (result.stderr or "")
-
 
         lower = output.lower()
 
